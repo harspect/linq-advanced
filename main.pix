@@ -169,12 +169,20 @@
         <Text>Прочитать обновленную таблицу в dt_output </Text>
         <_activityFullName>Activities.Office.Excel.ReadRange</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i24" i:type="ExecutedStep">
+      <AbstractStep z:Id="i24" i:type="CommentStep">
+        <Childs />
+        <Id>925ede8f-ad0e-4e90-b251-8c1a5eba61f3</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <Text>Задание 1.2-1.3</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i25" i:type="ExecutedStep">
         <Childs />
         <Id>2c39367e-fa7f-4476-a9a1-114bffee07ad</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i25">
+          <PropertyValue z:Id="i26">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_first.AsEnumerable()
@@ -185,25 +193,28 @@
     return column.ColumnName;
     }).ToList();
     row_new["Сумма баллов (платно)"] = (String.IsNullOrEmpty($"{row["Баллы по математике (платно)"]}") ? 0 : Int32.Parse($"{row["Баллы по математике (платно)"]}")) + 
-        (String.IsNullOrEmpty($"{row["Баллы по информатике (платно)"]}") ? 0 : Int32.Parse($"{row["Баллы по информатике (платно)"]}")) +
-        (String.IsNullOrEmpty($"{row["Баллы по русскому (платно)"]}") ? 0 : Int32.Parse($"{row["Баллы по русскому (платно)"]}"));
+        (String.IsNullOrEmpty($"{row["Баллы по информатике (платно)"]}") ? null : Int32.Parse($"{row["Баллы по информатике (платно)"]}")) +
+        (String.IsNullOrEmpty($"{row["Баллы по русскому (платно)"]}") ? null : Int32.Parse($"{row["Баллы по русскому (платно)"]}"));
     row_new["Сумма баллов (бюджет)"] = (String.IsNullOrEmpty($"{row["Баллы по математике (бюджет)"]}") ? 0 : Int32.Parse($"{row["Баллы по математике (бюджет)"]}")) + 
-        (String.IsNullOrEmpty($"{row["Баллы по информатике (бюджет)"]}") ? 0 : Int32.Parse($"{row["Баллы по информатике (бюджет)"]}")) +
-        (String.IsNullOrEmpty($"{row["Баллы по русскому (бюджет)"]}") ? 0 : Int32.Parse($"{row["Баллы по русскому (бюджет)"]}"));
-    row_new["Среднее баллов (платно)"] = Double.Round(new List&lt;String&gt;{"математике", "информатике", "русскому"}.Select(str_name =&gt; 
-        String.IsNullOrEmpty($"{row[$"Баллы по {str_name} (платно)"]}") ? 0 
-        : Int32.Parse($"{row[$"Баллы по {str_name} (платно)"]}")
-    ).Average(), 2).ToString();
-    row_new["Среднее баллов (бюджет)"] = Double.Round(new List&lt;String&gt;{"математике", "информатике", "русскому"}.Select(str_name =&gt; 
-        String.IsNullOrEmpty($"{row[$"Баллы по {str_name} (бюджет)"]}") ? 0 
-        : Int32.Parse($"{row[$"Баллы по {str_name} (бюджет)"]}")
-    ).Average(), 2).ToString();
+        (String.IsNullOrEmpty($"{row["Баллы по информатике (бюджет)"]}") ? null : Int32.Parse($"{row["Баллы по информатике (бюджет)"]}")) +
+        (String.IsNullOrEmpty($"{row["Баллы по русскому (бюджет)"]}") ? null : Int32.Parse($"{row["Баллы по русскому (бюджет)"]}"));
+    row_new["Среднее баллов (платно)"] = Regex.Replace(
+        Double.Round(new List&lt;String&gt;{"математике", "информатике", "русскому"}.Select(str_name =&gt; 
+            String.IsNullOrEmpty($"{row[$"Баллы по {str_name} (платно)"]}") ? 0
+            : Int32.Parse($"{row[$"Баллы по {str_name} (платно)"]}")
+    ).Average(), 2).ToString(), @"^0$", "");    
+    row_new["Среднее баллов (бюджет)"] = Regex.Replace(
+        Double.Round(new List&lt;String&gt;{"математике", "информатике", "русскому"}.Select(str_name =&gt; 
+            String.IsNullOrEmpty($"{row[$"Баллы по {str_name} (бюджет)"]}") ? 0
+            : Int32.Parse($"{row[$"Баллы по {str_name} (бюджет)"]}")
+    ).Average(), 2).ToString(), @"^0$", "");
     return row_new;
-}).CopyToDataTable()</_expression>
+})
+.CopyToDataTable()</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i26">
+          <PropertyValue z:Id="i27">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_new</_expression>
@@ -218,19 +229,27 @@
         <Text>Создать колонки со средним и суммой баллов в новую таблицу dt_new</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i27" i:type="ExecutedStep">
+      <AbstractStep z:Id="i28" i:type="CommentStep">
+        <Childs />
+        <Id>cdd4fad0-97fa-497f-92ec-7567b839a65b</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <Text>Задание 1.3</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i29" i:type="ExecutedStep">
         <Childs />
         <Id>24285eb3-ceb6-46ef-bc54-f0ca1e4ba19c</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i28">
+          <PropertyValue z:Id="i30">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_new.Clone()</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i29">
+          <PropertyValue z:Id="i31">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted</_expression>
@@ -242,60 +261,15 @@
         <EnableStatus>true</EnableStatus>
         <ExceptionHandlingMode>Default</ExceptionHandlingMode>
         <RetryCount>-1</RetryCount>
-        <Text></Text>
+        <Text>Инициализация dt_sorted</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i30" i:type="ExecutedStep">
-        <Childs />
-        <Id>087ad289-370d-4208-aac7-edf398272439</Id>
-        <Parent z:Ref="i2" />
-        <PropertyValues>
-          <PropertyValue z:Id="i31">
-            <PropertyName>CSCode</PropertyName>
-            <_dataType>Value</_dataType>
-            <_expression i:nil="true" />
-            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:string">dt_new.AsEnumerable().Where( row =&gt; 
-    String.IsNullOrEmpty($"{row["ВУЗ"]}") == false
-)
-.Select(row =&gt; $"{row["ВУЗ"]}")
-.ToList().Select(str_name =&gt;
-    {
-        var dt_ordered = dt_sorted.Clone();
-        dt_ordered = dt_new.AsEnumerable()
-            .SkipWhile(row =&gt; !$"{row["ВУЗ"]}".Equals(str_name)).Skip(1)
-            .TakeWhile(row =&gt; String.IsNullOrEmpty($"{row["ВУЗ"]}"))
-            .OrderBy(row =&gt; $"{row["Факультет"]}")
-            .CopyToDataTable();
-        dt_sorted.Merge(dt_new.AsEnumerable()
-            .Where(row =&gt; $"{row["ВУЗ"]}".Equals(str_name))
-            .CopyToDataTable());
-        dt_sorted.Merge(dt_ordered);
-        return str_name;
-    }
-).ToList();</_value>
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-          <PropertyValue z:Id="i32">
-            <PropertyName>Timeout</PropertyName>
-            <_dataType>Value</_dataType>
-            <_expression i:nil="true" />
-            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">0</_value>
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-        </PropertyValues>
-        <SelectedOptionId i:nil="true" />
-        <EnableStatus>true</EnableStatus>
-        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
-        <RetryCount>-1</RetryCount>
-        <Text></Text>
-        <_activityFullName>BR.Core.Base.ExecuteCSCode</_activityFullName>
-      </AbstractStep>
-      <AbstractStep z:Id="i33" i:type="ExecutedStep">
+      <AbstractStep z:Id="i32" i:type="ExecutedStep">
         <Childs />
         <Id>8a341c52-08ec-48dc-90b5-5da675960c16</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i34">
+          <PropertyValue z:Id="i33">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_new.AsEnumerable().Where( row =&gt; 
@@ -320,7 +294,7 @@
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i35">
+          <PropertyValue z:Id="i34">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>linq_query</_expression>
@@ -334,6 +308,14 @@
         <RetryCount>-1</RetryCount>
         <Text>Выполнить сортировку для вузов по названию дисциплин в dt_sorted</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i35" i:type="CommentStep">
+        <Childs />
+        <Id>c7e883c0-80a1-42e7-8de7-67ff74f00b95</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <Text>Задание 1.4</Text>
       </AbstractStep>
       <AbstractStep z:Id="i36" i:type="ExecutedStep">
         <Childs />
@@ -390,212 +372,27 @@
         <Text></Text>
         <_activityFullName>Activities.Office.Excel.WriteRange</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i43" i:type="ExecutedStep">
+      <AbstractStep z:Id="i43" i:type="CommentStep">
         <Childs />
-        <Id>521d8804-bbcd-4d49-b4d0-1191245e78f7</Id>
+        <Id>2498a769-e7ec-403e-aed3-c45400d27bd7</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <Text>Задание 1.5</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i44" i:type="ExecutedStep">
+        <Childs />
+        <Id>63f76892-bc7e-48ee-b747-7bd6e0b64838</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i44">
-            <PropertyName>Value</PropertyName>
-            <_dataType>Expression</_dataType>
-            <_expression>dt_sorted.AsEnumerable().Select((row, id) =&gt; new {row, id}).AsEnumerable().Select()
-
-dt_sorted.AsEnumerable().Select((row, id) =&gt; 
-    row["Количество бюджетных мест"]
-    .Equals(dt_sorted.AsEnumerable()
-    .Min(row_temp =&gt; Int32.Parse(row_temp["Количество бюджетных мест"])))
-)</_expression>
-            <_value i:nil="true" />
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
           <PropertyValue z:Id="i45">
-            <PropertyName>To</PropertyName>
-            <_dataType>Expression</_dataType>
-            <_expression>temp</_expression>
-            <_value i:nil="true" />
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-        </PropertyValues>
-        <SelectedOptionId i:nil="true" />
-        <EnableStatus>false</EnableStatus>
-        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
-        <RetryCount>-1</RetryCount>
-        <Text></Text>
-        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
-      </AbstractStep>
-      <AbstractStep z:Id="i46" i:type="ExecutedStep">
-        <Childs />
-        <Id>3efe1985-c07f-450d-8aac-c41779b5df9e</Id>
-        <Parent z:Ref="i2" />
-        <PropertyValues>
-          <PropertyValue z:Id="i47">
-            <PropertyName>CSCode</PropertyName>
-            <_dataType>Value</_dataType>
-            <_expression i:nil="true" />
-            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:string">var excel = new Microsoft.Office.Interop.Excel.Application();
-var wb_excel = excel.Workbooks.Open($"{dict_config["FilePath"]}");
-var sheet_output = (Microsoft.Office.Interop.Excel.Worksheet) wb_excel.Worksheets[$"{dict_config["OutputSheetName"]}"];
-
-
-Microsoft.Office.Interop.Excel.Range range_toColor = (Microsoft.Office.Interop.Excel.Range)sheet_output.Cells[2,1];
-// Покраска 
-range_toColor.Interior.Color = Color.Red;
-
-
-wb_excel.Close();
-excel.Quit();
-
-
-dt_new.AsEnumerable().Where( row =&gt; 
-    String.IsNullOrEmpty($"{row["ВУЗ"]}") == false
-)
-.Select(row =&gt; $"{row["ВУЗ"]}")
-.ToList().Select(str_name =&gt;
-    {
-        var dt_ordered = dt_sorted.Clone();
-        // Таблица сгруппированная для вуза
-        dt_ordered = dt_new.AsEnumerable()
-            .SkipWhile(row =&gt; !$"{row["ВУЗ"]}".Equals(str_name)).Skip(1)
-            .TakeWhile(row =&gt; String.IsNullOrEmpty($"{row["ВУЗ"]}"))
-            .CopyToDataTable();
-        dt_ordered.AsEnumerable().Select((row, ind) =&gt; new{row, ind}).Where();
-        dt_sorted.Merge(dt_new.AsEnumerable()
-            .Where(row =&gt; $"{row["ВУЗ"]}".Equals(str_name))
-            .CopyToDataTable());
-        dt_sorted.Merge(dt_ordered);
-        return str_name;
-    }
-).ToList()</_value>
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-          <PropertyValue z:Id="i48">
-            <PropertyName>Timeout</PropertyName>
-            <_dataType>Value</_dataType>
-            <_expression i:nil="true" />
-            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">0</_value>
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-        </PropertyValues>
-        <SelectedOptionId i:nil="true" />
-        <EnableStatus>false</EnableStatus>
-        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
-        <RetryCount>-1</RetryCount>
-        <Text></Text>
-        <_activityFullName>BR.Core.Base.ExecuteCSCode</_activityFullName>
-      </AbstractStep>
-      <AbstractStep z:Id="i49" i:type="ExecutedStep">
-        <Childs />
-        <Id>56cc323e-3401-4039-8ba2-a88477aea32e</Id>
-        <Parent z:Ref="i2" />
-        <PropertyValues>
-          <PropertyValue z:Id="i50">
-            <PropertyName>Color</PropertyName>
-            <_dataType>Value</_dataType>
-            <_expression i:nil="true" />
-            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:string">red</_value>
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-          <PropertyValue z:Id="i51">
-            <PropertyName>Range</PropertyName>
-            <_dataType>Expression</_dataType>
-            <_expression>"M" + $"{}"</_expression>
-            <_value i:nil="true" />
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-          <PropertyValue z:Id="i52">
-            <PropertyName>RowNumber</PropertyName>
-            <_dataType>Value</_dataType>
-            <_expression i:nil="true" />
-            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-          <PropertyValue z:Id="i53">
-            <PropertyName>ColNumber</PropertyName>
-            <_dataType>Value</_dataType>
-            <_expression i:nil="true" />
-            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-          <PropertyValue z:Id="i54">
-            <PropertyName>SheetName</PropertyName>
-            <_dataType>Expression</_dataType>
-            <_expression>$"{dict_config["OutputSheetName"]}"</_expression>
-            <_value i:nil="true" />
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-          <PropertyValue z:Id="i55">
-            <PropertyName>FileName</PropertyName>
-            <_dataType>Value</_dataType>
-            <_expression></_expression>
-            <_value i:nil="true" />
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-        </PropertyValues>
-        <SelectedOptionId>1</SelectedOptionId>
-        <EnableStatus>false</EnableStatus>
-        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
-        <RetryCount>-1</RetryCount>
-        <Text>Закрасить минимум</Text>
-        <_activityFullName>Activities.Office.Excel.SetColor</_activityFullName>
-      </AbstractStep>
-      <AbstractStep z:Id="i56" i:type="ExecutedStep">
-        <Childs />
-        <Id>329da7c0-1009-4cac-a66f-dc3a8c552ac9</Id>
-        <Parent z:Ref="i2" />
-        <PropertyValues>
-          <PropertyValue z:Id="i57">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
-            <_expression>dt_sorted.AsEnumerable().Select((row, ind) =&gt; new {row = row, ind = ind})
-.Where(x =&gt; String.IsNullOrEmpty($"{x.row["Количество бюджетных мест"]}") == false)
-.Where(x =&gt; 
-    Int32.Parse($"{x.row["Количество бюджетных мест"]}")
-    .Equals(dt_sorted.AsEnumerable()
-        .Where(row =&gt; String.IsNullOrEmpty($"{row["Количество бюджетных мест"]}") == false)
-        .Min(row =&gt; Int32.Parse($"{row["Количество бюджетных мест"]}"))
-    )
-)
-.Select(x =&gt; x.ind).ToList()</_expression>
+            <_expression>new List&lt;Int32&gt;()</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i58">
-            <PropertyName>To</PropertyName>
-            <_dataType>Expression</_dataType>
-            <_expression>list_indMin</_expression>
-            <_value i:nil="true" />
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-        </PropertyValues>
-        <SelectedOptionId i:nil="true" />
-        <EnableStatus>true</EnableStatus>
-        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
-        <RetryCount>-1</RetryCount>
-        <Text>Получить индексы min количества бюджетных мест</Text>
-        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
-      </AbstractStep>
-      <AbstractStep z:Id="i59" i:type="ExecutedStep">
-        <Childs />
-        <Id>7133eb65-4501-40a1-a33c-992debc32fa0</Id>
-        <Parent z:Ref="i2" />
-        <PropertyValues>
-          <PropertyValue z:Id="i60">
-            <PropertyName>Value</PropertyName>
-            <_dataType>Expression</_dataType>
-            <_expression>dt_sorted.AsEnumerable().Select((row, ind) =&gt; new {row = row, ind = ind})
-.Where(x =&gt; String.IsNullOrEmpty($"{x.row["Количество бюджетных мест"]}") == false)
-.Where(x =&gt; 
-    Int32.Parse($"{x.row["Количество бюджетных мест"]}")
-    .Equals(dt_sorted.AsEnumerable()
-        .Where(row =&gt; String.IsNullOrEmpty($"{row["Количество бюджетных мест"]}") == false)
-        .Max(row =&gt; Int32.Parse($"{row["Количество бюджетных мест"]}"))
-    )
-)
-.Select(x =&gt; x.ind).ToList()</_expression>
-            <_value i:nil="true" />
-            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
-          </PropertyValue>
-          <PropertyValue z:Id="i61">
+          <PropertyValue z:Id="i46">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>list_indMax</_expression>
@@ -607,17 +404,136 @@ dt_new.AsEnumerable().Where( row =&gt;
         <EnableStatus>true</EnableStatus>
         <ExceptionHandlingMode>Default</ExceptionHandlingMode>
         <RetryCount>-1</RetryCount>
+        <Text>Инициализация list_indMax</Text>
+        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i47" i:type="ExecutedStep">
+        <Childs />
+        <Id>fad817ad-23e1-408a-90bb-36904b4aeb24</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues>
+          <PropertyValue z:Id="i48">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dt_new.AsEnumerable().Where( row =&gt; 
+    String.IsNullOrEmpty($"{row["ВУЗ"]}") == false
+)
+.Select(row =&gt; $"{row["ВУЗ"]}")
+.ToList().Select(str_name =&gt; {
+        var list_grouped = dt_sorted.AsEnumerable().Select((row, ind) =&gt; new {row = row, ind = ind})
+            .SkipWhile(x =&gt; $"{x.row["ВУЗ"]}" != str_name).Skip(1)
+            .TakeWhile(x =&gt; String.IsNullOrEmpty($"{x.row["ВУЗ"]}"))
+            .ToList();
+        var list_indMaxGroup = list_grouped.Where(x =&gt;
+            Int32.Parse($"{x.row["Количество бюджетных мест"]}")
+            .Equals(list_grouped.AsEnumerable()
+                .Where(x =&gt; String.IsNullOrEmpty($"{x.row["Количество бюджетных мест"]}") == false)
+                .Max(x =&gt; Int32.Parse($"{x.row["Количество бюджетных мест"]}"))
+            )
+        ).Select(x =&gt; x.ind).ToList();
+        list_indMax.AddRange(list_indMaxGroup);
+        return str_name;
+    }
+).ToList()</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i49">
+            <PropertyName>To</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>linq_query</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
         <Text>Получить индексы max количества бюджетных мест</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i62" i:type="ExecutedStep">
+      <AbstractStep z:Id="i50" i:type="ExecutedStep">
+        <Childs />
+        <Id>2efa0ffc-3252-471f-9e97-1f3a38a1c8b2</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues>
+          <PropertyValue z:Id="i51">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>new List&lt;Int32&gt;()</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i52">
+            <PropertyName>To</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>list_indMin</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Инициализация list_indMin</Text>
+        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i53" i:type="ExecutedStep">
+        <Childs />
+        <Id>0813ba0b-a75c-4432-bc41-38f69a7dfe1c</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues>
+          <PropertyValue z:Id="i54">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dt_new.AsEnumerable().Where( row =&gt; 
+    String.IsNullOrEmpty($"{row["ВУЗ"]}") == false
+)
+.Select(row =&gt; $"{row["ВУЗ"]}")
+.ToList().Select(str_name =&gt; {
+        var list_grouped = dt_sorted.AsEnumerable().Select((row, ind) =&gt; new {row = row, ind = ind})
+            .SkipWhile(x =&gt; $"{x.row["ВУЗ"]}" != str_name).Skip(1)
+            .TakeWhile(x =&gt; String.IsNullOrEmpty($"{x.row["ВУЗ"]}"))
+            .ToList();
+        var list_indMinGroup = list_grouped.Where(x =&gt;
+            Int32.Parse($"{x.row["Количество бюджетных мест"]}")
+            .Equals(list_grouped.AsEnumerable()
+                .Where(x =&gt; String.IsNullOrEmpty($"{x.row["Количество бюджетных мест"]}") == false)
+                .Min(x =&gt; Int32.Parse($"{x.row["Количество бюджетных мест"]}"))
+            )
+        ).Select(x =&gt; x.ind).ToList();
+        list_indMin.AddRange(list_indMinGroup);
+        return str_name;
+    }
+).ToList()</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i55">
+            <PropertyName>To</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>linq_query</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Получить индексы min количества бюджетных мест</Text>
+        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i56" i:type="ExecutedStep">
         <Childs>
-          <AbstractStep z:Id="i63" i:type="ExecutedStep">
+          <AbstractStep z:Id="i57" i:type="ExecutedStep">
             <Childs />
             <Id>453ed646-d940-4de3-a874-4a6a516537d5</Id>
-            <Parent z:Ref="i62" />
+            <Parent z:Ref="i56" />
             <PropertyValues>
-              <PropertyValue z:Id="i64">
+              <PropertyValue z:Id="i58">
                 <PropertyName>Value</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>dt_sorted.Columns.Cast&lt;DataColumn&gt;()
@@ -628,7 +544,7 @@ dt_new.AsEnumerable().Where( row =&gt;
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i65">
+              <PropertyValue z:Id="i59">
                 <PropertyName>To</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>int_columnInd</_expression>
@@ -643,47 +559,47 @@ dt_new.AsEnumerable().Where( row =&gt;
             <Text>Получение номера колонки для покраски</Text>
             <_activityFullName>BR.Core.Base.Assign</_activityFullName>
           </AbstractStep>
-          <AbstractStep z:Id="i66" i:type="ExecutedStep">
+          <AbstractStep z:Id="i60" i:type="ExecutedStep">
             <Childs />
             <Id>aab29000-7e65-4192-899f-4cd7b346d5b1</Id>
-            <Parent z:Ref="i62" />
+            <Parent z:Ref="i56" />
             <PropertyValues>
-              <PropertyValue z:Id="i67">
+              <PropertyValue z:Id="i61">
                 <PropertyName>Color</PropertyName>
                 <_dataType>Value</_dataType>
                 <_expression i:nil="true" />
                 <_value xmlns:d9p1="http://www.w3.org/2001/XMLSchema" i:type="d9p1:string">red</_value>
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i68">
+              <PropertyValue z:Id="i62">
                 <PropertyName>Range</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>"M" + $"{}"</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i69">
+              <PropertyValue z:Id="i63">
                 <PropertyName>RowNumber</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>int_rowInd + 1</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i70">
+              <PropertyValue z:Id="i64">
                 <PropertyName>ColNumber</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>int_columnInd</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i71">
+              <PropertyValue z:Id="i65">
                 <PropertyName>SheetName</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>$"{dict_config["OutputSheetName"]}"</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i72">
+              <PropertyValue z:Id="i66">
                 <PropertyName>FileName</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -702,21 +618,21 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Id>cbf3d7c9-dd34-41cd-9e8b-9f4dcf145896</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i73">
+          <PropertyValue z:Id="i67">
             <PropertyName>Collection</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>list_indMin</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i74">
+          <PropertyValue z:Id="i68">
             <PropertyName>Iterator</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_rowInd</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i75">
+          <PropertyValue z:Id="i69">
             <PropertyName>Counter</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression></_expression>
@@ -731,14 +647,14 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Покраска мин кол-ва бюджетных мест в красный</Text>
         <_activityFullName>BR.Core.Base.LoopForEach</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i76" i:type="ExecutedStep">
+      <AbstractStep z:Id="i70" i:type="ExecutedStep">
         <Childs>
-          <AbstractStep z:Id="i77" i:type="ExecutedStep">
+          <AbstractStep z:Id="i71" i:type="ExecutedStep">
             <Childs />
             <Id>c2f2032e-1517-42a0-b43a-10787e02eafc</Id>
-            <Parent z:Ref="i76" />
+            <Parent z:Ref="i70" />
             <PropertyValues>
-              <PropertyValue z:Id="i78">
+              <PropertyValue z:Id="i72">
                 <PropertyName>Value</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>dt_sorted.Columns.Cast&lt;DataColumn&gt;()
@@ -749,7 +665,7 @@ dt_new.AsEnumerable().Where( row =&gt;
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i79">
+              <PropertyValue z:Id="i73">
                 <PropertyName>To</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>int_columnInd</_expression>
@@ -764,47 +680,47 @@ dt_new.AsEnumerable().Where( row =&gt;
             <Text>Получение номера колонки для покраски</Text>
             <_activityFullName>BR.Core.Base.Assign</_activityFullName>
           </AbstractStep>
-          <AbstractStep z:Id="i80" i:type="ExecutedStep">
+          <AbstractStep z:Id="i74" i:type="ExecutedStep">
             <Childs />
             <Id>b20a816f-2828-47c6-886e-30909942edd3</Id>
-            <Parent z:Ref="i76" />
+            <Parent z:Ref="i70" />
             <PropertyValues>
-              <PropertyValue z:Id="i81">
+              <PropertyValue z:Id="i75">
                 <PropertyName>Color</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>"green"</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i82">
+              <PropertyValue z:Id="i76">
                 <PropertyName>Range</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>"M" + $"{}"</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i83">
+              <PropertyValue z:Id="i77">
                 <PropertyName>RowNumber</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>int_rowInd + 1</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i84">
+              <PropertyValue z:Id="i78">
                 <PropertyName>ColNumber</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>int_columnInd</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i85">
+              <PropertyValue z:Id="i79">
                 <PropertyName>SheetName</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>$"{dict_config["OutputSheetName"]}"</_expression>
                 <_value i:nil="true" />
                 <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
               </PropertyValue>
-              <PropertyValue z:Id="i86">
+              <PropertyValue z:Id="i80">
                 <PropertyName>FileName</PropertyName>
                 <_dataType>Expression</_dataType>
                 <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -823,21 +739,21 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Id>a116db0e-80a7-487a-93de-b116f8d9afa1</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i87">
+          <PropertyValue z:Id="i81">
             <PropertyName>Collection</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>list_indMax</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i88">
+          <PropertyValue z:Id="i82">
             <PropertyName>Iterator</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_rowInd</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i89">
+          <PropertyValue z:Id="i83">
             <PropertyName>Counter</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression></_expression>
@@ -852,7 +768,15 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Покраска макс кол-ва бюджетных мест в зеленый</Text>
         <_activityFullName>BR.Core.Base.LoopForEach</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i90" i:type="CommentStep">
+      <AbstractStep z:Id="i84" i:type="CommentStep">
+        <Childs />
+        <Id>6b81a93a-4251-4a01-a675-fddcbebb5c38</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <Text>ЧАСТЬ 2</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i85" i:type="CommentStep">
         <Childs />
         <Id>ff970451-e2e9-41c9-9db0-18a24d840421</Id>
         <Parent z:Ref="i2" />
@@ -860,12 +784,12 @@ dt_new.AsEnumerable().Where( row =&gt;
         <SelectedOptionId i:nil="true" />
         <Text>Задание 1</Text>
       </AbstractStep>
-      <AbstractStep z:Id="i91" i:type="ExecutedStep">
+      <AbstractStep z:Id="i86" i:type="ExecutedStep">
         <Childs />
         <Id>9753b90f-c4c9-4f00-9ea4-6430f14b8d57</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i92">
+          <PropertyValue z:Id="i87">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
@@ -874,7 +798,7 @@ dt_new.AsEnumerable().Where( row =&gt;
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i93">
+          <PropertyValue z:Id="i88">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_minScore</_expression>
@@ -889,12 +813,12 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Получить min балл на бюджет Программная инженерия</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i94" i:type="ExecutedStep">
+      <AbstractStep z:Id="i89" i:type="ExecutedStep">
         <Childs />
         <Id>291de4c5-7dac-4873-9d95-0fade6e0c145</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i95">
+          <PropertyValue z:Id="i90">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
@@ -903,7 +827,7 @@ dt_new.AsEnumerable().Where( row =&gt;
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i96">
+          <PropertyValue z:Id="i91">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_maxScore</_expression>
@@ -918,54 +842,54 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Получить max балл на бюджет Программная инженерия</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i97" i:type="ExecutedStep">
+      <AbstractStep z:Id="i92" i:type="ExecutedStep">
         <Childs />
         <Id>46a931a5-28f5-4da8-8468-9bfe176e7607</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i98">
+          <PropertyValue z:Id="i93">
             <PropertyName>Address</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"B6"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i99">
+          <PropertyValue z:Id="i94">
             <PropertyName>RowNumber</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i100">
+          <PropertyValue z:Id="i95">
             <PropertyName>ColNumber</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i101">
+          <PropertyValue z:Id="i96">
             <PropertyName>IsFormula</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i102">
+          <PropertyValue z:Id="i97">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_minScore</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i103">
+          <PropertyValue z:Id="i98">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i104">
+          <PropertyValue z:Id="i99">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -980,54 +904,54 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать мин балл для 09.03.04 в таблицу</Text>
         <_activityFullName>Activities.Office.Excel.WriteCell</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i105" i:type="ExecutedStep">
+      <AbstractStep z:Id="i100" i:type="ExecutedStep">
         <Childs />
         <Id>af482646-e376-4074-afaf-3fe374c0f76f</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i106">
+          <PropertyValue z:Id="i101">
             <PropertyName>Address</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"B5"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i107">
+          <PropertyValue z:Id="i102">
             <PropertyName>RowNumber</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i108">
+          <PropertyValue z:Id="i103">
             <PropertyName>ColNumber</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i109">
+          <PropertyValue z:Id="i104">
             <PropertyName>IsFormula</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i110">
+          <PropertyValue z:Id="i105">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_maxScore</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i111">
+          <PropertyValue z:Id="i106">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i112">
+          <PropertyValue z:Id="i107">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -1042,12 +966,12 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать макс балл для 09.03.04 в таблицу</Text>
         <_activityFullName>Activities.Office.Excel.WriteCell</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i113" i:type="ExecutedStep">
+      <AbstractStep z:Id="i108" i:type="ExecutedStep">
         <Childs />
         <Id>63b17645-82f7-4aae-9c91-0853fc235105</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i114">
+          <PropertyValue z:Id="i109">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
@@ -1056,7 +980,7 @@ dt_new.AsEnumerable().Where( row =&gt;
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i115">
+          <PropertyValue z:Id="i110">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_minScore</_expression>
@@ -1071,12 +995,12 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Получить min балл на бюджет Компьютерная безопасность</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i116" i:type="ExecutedStep">
+      <AbstractStep z:Id="i111" i:type="ExecutedStep">
         <Childs />
         <Id>8f49ae41-829c-433c-84fd-deec41fddde0</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i117">
+          <PropertyValue z:Id="i112">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
@@ -1085,7 +1009,7 @@ dt_new.AsEnumerable().Where( row =&gt;
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i118">
+          <PropertyValue z:Id="i113">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_maxScore</_expression>
@@ -1100,54 +1024,54 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Получить max балл на бюджет Компьютерная безопасность</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i119" i:type="ExecutedStep">
+      <AbstractStep z:Id="i114" i:type="ExecutedStep">
         <Childs />
         <Id>dca316d3-1389-4061-8512-4231d9cfdd2f</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i120">
+          <PropertyValue z:Id="i115">
             <PropertyName>Address</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"G6"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i121">
+          <PropertyValue z:Id="i116">
             <PropertyName>RowNumber</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i122">
+          <PropertyValue z:Id="i117">
             <PropertyName>ColNumber</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i123">
+          <PropertyValue z:Id="i118">
             <PropertyName>IsFormula</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i124">
+          <PropertyValue z:Id="i119">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_minScore</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i125">
+          <PropertyValue z:Id="i120">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i126">
+          <PropertyValue z:Id="i121">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -1162,54 +1086,54 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать мин балл для 10.05.01 в таблицу</Text>
         <_activityFullName>Activities.Office.Excel.WriteCell</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i127" i:type="ExecutedStep">
+      <AbstractStep z:Id="i122" i:type="ExecutedStep">
         <Childs />
         <Id>da7e122a-cfbf-42cf-a9df-bb7eb947cdca</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i128">
+          <PropertyValue z:Id="i123">
             <PropertyName>Address</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"G5"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i129">
+          <PropertyValue z:Id="i124">
             <PropertyName>RowNumber</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i130">
+          <PropertyValue z:Id="i125">
             <PropertyName>ColNumber</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">1</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i131">
+          <PropertyValue z:Id="i126">
             <PropertyName>IsFormula</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i132">
+          <PropertyValue z:Id="i127">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>int_maxScore</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i133">
+          <PropertyValue z:Id="i128">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i134">
+          <PropertyValue z:Id="i129">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -1224,7 +1148,7 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать макс балл для 10.05.01 в таблицу</Text>
         <_activityFullName>Activities.Office.Excel.WriteCell</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i135" i:type="CommentStep">
+      <AbstractStep z:Id="i130" i:type="CommentStep">
         <Childs />
         <Id>d945f62d-1e46-4257-8bcb-d970c6511b0b</Id>
         <Parent z:Ref="i2" />
@@ -1232,12 +1156,12 @@ dt_new.AsEnumerable().Where( row =&gt;
         <SelectedOptionId i:nil="true" />
         <Text>Задание 2</Text>
       </AbstractStep>
-      <AbstractStep z:Id="i136" i:type="ExecutedStep">
+      <AbstractStep z:Id="i131" i:type="ExecutedStep">
         <Childs />
         <Id>9842c3c5-9fc4-4699-9767-acd8efd066a4</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i137">
+          <PropertyValue z:Id="i132">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
@@ -1254,7 +1178,7 @@ dt_new.AsEnumerable().Where( row =&gt;
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i138">
+          <PropertyValue z:Id="i133">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_minScoreFaculties</_expression>
@@ -1269,12 +1193,12 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Получить факультеты с мин кол-вом баллов</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i139" i:type="ExecutedStep">
+      <AbstractStep z:Id="i134" i:type="ExecutedStep">
         <Childs />
         <Id>a2c2a4ba-cf84-4b8f-8434-d02d998220ff</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i140">
+          <PropertyValue z:Id="i135">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
@@ -1291,7 +1215,7 @@ dt_new.AsEnumerable().Where( row =&gt;
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i141">
+          <PropertyValue z:Id="i136">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_maxScoreFaculties</_expression>
@@ -1306,47 +1230,47 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Получить факультеты с макс кол-вом баллов</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i142" i:type="ExecutedStep">
+      <AbstractStep z:Id="i137" i:type="ExecutedStep">
         <Childs />
         <Id>91720aae-1f0a-40e9-ba60-c00852e48143</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i143">
+          <PropertyValue z:Id="i138">
             <PropertyName>StartingCell</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"D12"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i144">
+          <PropertyValue z:Id="i139">
             <PropertyName>DataTable</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_minScoreFaculties</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i145">
+          <PropertyValue z:Id="i140">
             <PropertyName>AddHeaders</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i146">
+          <PropertyValue z:Id="i141">
             <PropertyName>ConsiderDataType</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i147">
+          <PropertyValue z:Id="i142">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i148">
+          <PropertyValue z:Id="i143">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -1361,47 +1285,47 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать факультеты с мин кол-вом баллов бюджет в таблицу результатов</Text>
         <_activityFullName>Activities.Office.Excel.WriteRange</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i149" i:type="ExecutedStep">
+      <AbstractStep z:Id="i144" i:type="ExecutedStep">
         <Childs />
         <Id>e8c2f11a-b566-40b4-8472-c14808e07eaa</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i150">
+          <PropertyValue z:Id="i145">
             <PropertyName>StartingCell</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"A12"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i151">
+          <PropertyValue z:Id="i146">
             <PropertyName>DataTable</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_maxScoreFaculties</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i152">
+          <PropertyValue z:Id="i147">
             <PropertyName>AddHeaders</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i153">
+          <PropertyValue z:Id="i148">
             <PropertyName>ConsiderDataType</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i154">
+          <PropertyValue z:Id="i149">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i155">
+          <PropertyValue z:Id="i150">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -1416,12 +1340,12 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать факультеты с мин кол-вом баллов бюджет в таблицу результатов</Text>
         <_activityFullName>Activities.Office.Excel.WriteRange</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i156" i:type="ExecutedStep">
+      <AbstractStep z:Id="i151" i:type="ExecutedStep">
         <Childs />
         <Id>c2cda870-55a1-4407-8b6d-aeeceaa47ca6</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i157">
+          <PropertyValue z:Id="i152">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
@@ -1438,7 +1362,7 @@ dt_new.AsEnumerable().Where( row =&gt;
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i158">
+          <PropertyValue z:Id="i153">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_minScoreFaculties</_expression>
@@ -1453,12 +1377,12 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Получить факультеты с мин кол-вом баллов</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i159" i:type="ExecutedStep">
+      <AbstractStep z:Id="i154" i:type="ExecutedStep">
         <Childs />
         <Id>2f8ac504-b775-408e-9e61-085dbb94aaf7</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i160">
+          <PropertyValue z:Id="i155">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
@@ -1475,7 +1399,7 @@ dt_new.AsEnumerable().Where( row =&gt;
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i161">
+          <PropertyValue z:Id="i156">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_maxScoreFaculties</_expression>
@@ -1490,47 +1414,47 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Получить факультеты с макс кол-вом баллов</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i162" i:type="ExecutedStep">
+      <AbstractStep z:Id="i157" i:type="ExecutedStep">
         <Childs />
         <Id>71561408-d31e-4124-9568-fc7bd86404c8</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i163">
+          <PropertyValue z:Id="i158">
             <PropertyName>StartingCell</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"I12"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i164">
+          <PropertyValue z:Id="i159">
             <PropertyName>DataTable</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_minScoreFaculties</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i165">
+          <PropertyValue z:Id="i160">
             <PropertyName>AddHeaders</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i166">
+          <PropertyValue z:Id="i161">
             <PropertyName>ConsiderDataType</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i167">
+          <PropertyValue z:Id="i162">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i168">
+          <PropertyValue z:Id="i163">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -1545,47 +1469,47 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать факультеты с мин кол-вом баллов бюджет в таблицу результатов</Text>
         <_activityFullName>Activities.Office.Excel.WriteRange</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i169" i:type="ExecutedStep">
+      <AbstractStep z:Id="i164" i:type="ExecutedStep">
         <Childs />
         <Id>d6a9cc54-2c95-4a8a-9047-2f4a2f2e8acb</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i170">
+          <PropertyValue z:Id="i165">
             <PropertyName>StartingCell</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"F12"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i171">
+          <PropertyValue z:Id="i166">
             <PropertyName>DataTable</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_maxScoreFaculties</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i172">
+          <PropertyValue z:Id="i167">
             <PropertyName>AddHeaders</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i173">
+          <PropertyValue z:Id="i168">
             <PropertyName>ConsiderDataType</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i174">
+          <PropertyValue z:Id="i169">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i175">
+          <PropertyValue z:Id="i170">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -1600,7 +1524,7 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать факультеты с мин кол-вом баллов бюджет в таблицу результатов</Text>
         <_activityFullName>Activities.Office.Excel.WriteRange</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i176" i:type="CommentStep">
+      <AbstractStep z:Id="i171" i:type="CommentStep">
         <Childs />
         <Id>5c1a9d85-adbb-49b2-af51-a8fe4d80e38f</Id>
         <Parent z:Ref="i2" />
@@ -1608,32 +1532,32 @@ dt_new.AsEnumerable().Where( row =&gt;
         <SelectedOptionId i:nil="true" />
         <Text>Задание 3</Text>
       </AbstractStep>
-      <AbstractStep z:Id="i177" i:type="ExecutedStep">
+      <AbstractStep z:Id="i172" i:type="ExecutedStep">
         <Childs />
         <Id>75cb5cc2-4ee7-4a8f-b53a-b27f5fb140e7</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i178">
+          <PropertyValue z:Id="i173">
             <PropertyName>Value</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dt_sorted.AsEnumerable()
-.Where(row =&gt; String.IsNullOrEmpty($"{row["Факультеты"]}") == false)
 .Where(row =&gt; 
-    Int32.Parse($"{row["Сумма баллов (платно)"]}")
-    .Equals(dt_sorted.AsEnumerable()
-        .Where(row =&gt; String.IsNullOrEmpty($"{row["Сумма баллов (платно)"]}") == false &amp;&amp; $"{row["Сумма баллов (платно)"]}" != "0")
-        .Max(row =&gt; Int32.Parse($"{row["Сумма баллов (платно)"]}"))
-    )
+    Regex.IsMatch($"{row["Факультет"]}", @"(09|38)\.\d{2}\.\d{2}")
 )
-.OrderByDescending(row =&gt; $"{row["Факультет"]}")
-.AsDataView().ToTable(true, "Факультет")</_expression>
+.Select(row =&gt; {
+    var row_new = dt_sorted.NewRow();
+    var reg_Match = Regex.Match($"{row["Факультет"]}", @"(?&lt;=\d{2}\.\d{2}\.\d{2})\s?(\(.*\))?\s?([^\(\n]*)(\(.*\))?([^\(\n]*)?[$]?");
+    row_new["Факультет"] = reg_Match.Groups[2].Value.Trim() + reg_Match.Groups[4].Value;
+    return row_new;
+}).CopyToDataTable().AsDataView()
+.ToTable(true, "Факультет")</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i179">
+          <PropertyValue z:Id="i174">
             <PropertyName>To</PropertyName>
             <_dataType>Expression</_dataType>
-            <_expression>dt_maxScoreFaculties</_expression>
+            <_expression>dt_Faculties</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
@@ -1642,50 +1566,50 @@ dt_new.AsEnumerable().Where( row =&gt;
         <EnableStatus>true</EnableStatus>
         <ExceptionHandlingMode>Default</ExceptionHandlingMode>
         <RetryCount>-1</RetryCount>
-        <Text>Получить факультеты с макс кол-вом баллов</Text>
+        <Text>Получить названия факультетов</Text>
         <_activityFullName>BR.Core.Base.Assign</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i180" i:type="ExecutedStep">
+      <AbstractStep z:Id="i175" i:type="ExecutedStep">
         <Childs />
         <Id>d170c95d-adb0-4c22-a924-fb990622bc93</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i181">
+          <PropertyValue z:Id="i176">
             <PropertyName>StartingCell</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>"A41"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i182">
+          <PropertyValue z:Id="i177">
             <PropertyName>DataTable</PropertyName>
             <_dataType>Expression</_dataType>
-            <_expression>dt_minScoreFaculties</_expression>
+            <_expression>dt_Faculties</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i183">
+          <PropertyValue z:Id="i178">
             <PropertyName>AddHeaders</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i184">
+          <PropertyValue z:Id="i179">
             <PropertyName>ConsiderDataType</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
             <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i185">
+          <PropertyValue z:Id="i180">
             <PropertyName>SheetName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>$"{dict_config["TempSheetName"]}"</_expression>
             <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
-          <PropertyValue z:Id="i186">
+          <PropertyValue z:Id="i181">
             <PropertyName>FileName</PropertyName>
             <_dataType>Expression</_dataType>
             <_expression>dict_config["FilePath"].ToString()</_expression>
@@ -1700,25 +1624,258 @@ dt_new.AsEnumerable().Where( row =&gt;
         <Text>Записать факультеты с мин кол-вом баллов бюджет в таблицу результатов</Text>
         <_activityFullName>Activities.Office.Excel.WriteRange</_activityFullName>
       </AbstractStep>
-      <AbstractStep z:Id="i187" i:type="ExecutedStep">
+      <AbstractStep z:Id="i182" i:type="CommentStep">
         <Childs />
-        <Id>ac70005d-1940-443d-9a1b-a6be8cd8cce7</Id>
+        <Id>5aa67a49-169d-4515-90c4-eff2d0cd11dc</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <Text>Задание 4</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i183" i:type="ExecutedStep">
+        <Childs />
+        <Id>7ef57080-3ba6-4081-b2c8-1d61aa800f9b</Id>
         <Parent z:Ref="i2" />
         <PropertyValues>
-          <PropertyValue z:Id="i188">
-            <PropertyName>Count</PropertyName>
+          <PropertyValue z:Id="i184">
+            <PropertyName>InitialTable</PropertyName>
             <_dataType>Value</_dataType>
             <_expression i:nil="true" />
-            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:int">0</_value>
+            <_value xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.Collections" i:type="d7p1:DataTableSettings">
+              <d7p1:Table>
+                <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+                  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="DataTableSettingsTable" msdata:UseCurrentLocale="true">
+                    <xs:complexType>
+                      <xs:choice minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="DataTableSettingsTable">
+                          <xs:complexType>
+                            <xs:sequence>
+                              <xs:element name="ВУЗ" type="xs:string" minOccurs="0" />
+                              <xs:element name="Ссылка_x0020_на_x0020_сайт" type="xs:string" minOccurs="0" />
+                              <xs:element name="Количество_x0020_бюджетных_x0020_мест_x0020__x0028_max_x0029_" type="xs:string" minOccurs="0" />
+                            </xs:sequence>
+                          </xs:complexType>
+                        </xs:element>
+                      </xs:choice>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:schema>
+                <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1" />
+              </d7p1:Table>
+            </_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i185">
+            <PropertyName>BaseDataTable</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dt_res</_expression>
+            <_value i:nil="true" />
             <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
           </PropertyValue>
         </PropertyValues>
-        <SelectedOptionId>0</SelectedOptionId>
+        <SelectedOptionId i:nil="true" />
         <EnableStatus>true</EnableStatus>
         <ExceptionHandlingMode>Default</ExceptionHandlingMode>
         <RetryCount>-1</RetryCount>
-        <Text></Text>
-        <_activityFullName>BR.Core.Base.Sleep</_activityFullName>
+        <Text>Создать таблицу dt_res с макс кол-вом баллов</Text>
+        <_activityFullName>Activities.BaseCollections.DT.CreateTable</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i186" i:type="ExecutedStep">
+        <Childs />
+        <Id>f1739bbb-c807-4294-a953-fd63b5138dd1</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues>
+          <PropertyValue z:Id="i187">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dt_new.AsEnumerable().Where( row =&gt; 
+    String.IsNullOrEmpty($"{row["ВУЗ"]}") == false)
+.Select(row =&gt; $"{row["ВУЗ"]}").ToList()
+.Select(str_name =&gt; {
+    var row_res = dt_res.NewRow();
+    // Извлечение макс кол-ва бюджетных мест
+    var int_max = dt_new.AsEnumerable()
+        .SkipWhile(row =&gt; $"{row["ВУЗ"]}".Equals(str_name) == false).Skip(1)
+        .TakeWhile(row =&gt; String.IsNullOrEmpty($"{row["ВУЗ"]}"))
+        .Max(row =&gt; Int32.Parse($"{row["Количество бюджетных мест"]}"));
+    row_res["ВУЗ"] = str_name;
+    row_res["Количество бюджетных мест (max)"] = int_max;
+    dt_res.Rows.Add(row_res);
+    return str_name;
+    }
+).ToList()</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i188">
+            <PropertyName>To</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>linq_query</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Наполнение таблицы вузов dt_res с макс кол-вом баллов</Text>
+        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i189" i:type="ExecutedStep">
+        <Childs />
+        <Id>4442a973-0891-4a82-804d-7f4c1d9dddaa</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues>
+          <PropertyValue z:Id="i190">
+            <PropertyName>Range</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>""</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i191">
+            <PropertyName>WithHeaders</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">true</_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i192">
+            <PropertyName>IgnoreEmptyRowsColumsAtStart</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">true</_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i193">
+            <PropertyName>GetTypedValues</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i194">
+            <PropertyName>Result</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dt_univ</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i195">
+            <PropertyName>SheetName</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>$"{dict_config["SitesSheetName"]}"</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i196">
+            <PropertyName>FileName</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dict_config["FilePath"].ToString()</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Прочитать вузы в dt_univ</Text>
+        <_activityFullName>Activities.Office.Excel.ReadRange</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i197" i:type="ExecutedStep">
+        <Childs />
+        <Id>460f592a-ec9f-477b-9a3d-a6ab24d2b805</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues>
+          <PropertyValue z:Id="i198">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dt_univ.AsEnumerable().Join(dt_res.AsEnumerable().Where(row =&gt; 
+        Int32.Parse($"{row["Количество бюджетных мест (max)"]}") &gt; 140).AsDataView().ToTable().AsEnumerable(),
+f =&gt; f["ВУЗ"],
+s =&gt; s["ВУЗ"],
+(f, s) =&gt; {
+    var row_new = dt_res.NewRow();
+    row_new["ВУЗ"] = f["ВУЗ"];
+    row_new["Ссылка на сайт"] = f["Ссылка на сайт"];
+    row_new["Количество бюджетных мест (max)"] = s["Количество бюджетных мест (max)"];
+    return row_new;
+    }
+).CopyToDataTable()</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i199">
+            <PropertyName>To</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dt_res</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Собрать вузы с макс кол-вом баллов &gt; 140 в dt_res</Text>
+        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i200" i:type="ExecutedStep">
+        <Childs />
+        <Id>bf42ee85-1e4c-4207-85f3-fe9e4830c311</Id>
+        <Parent z:Ref="i2" />
+        <PropertyValues>
+          <PropertyValue z:Id="i201">
+            <PropertyName>StartingCell</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>"A55"</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i202">
+            <PropertyName>DataTable</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dt_res</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i203">
+            <PropertyName>AddHeaders</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i204">
+            <PropertyName>ConsiderDataType</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:boolean">false</_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i205">
+            <PropertyName>SheetName</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>$"{dict_config["TempSheetName"]}"</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i206">
+            <PropertyName>FileName</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>dict_config["FilePath"].ToString()</_expression>
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Записать факультеты с мин кол-вом баллов бюджет в таблицу результатов</Text>
+        <_activityFullName>Activities.Office.Excel.WriteRange</_activityFullName>
       </AbstractStep>
     </Childs>
     <Id>d10f9974-80ee-4352-82f7-ba501407423a</Id>
@@ -1733,11 +1890,11 @@ dt_new.AsEnumerable().Where( row =&gt;
   </Logic>
   <Name>main.pix</Name>
   <Namespaces xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:string>Microsoft.Office.Interop.Excel</d2p1:string>
     <d2p1:string>System.Drawing</d2p1:string>
+    <d2p1:string>System.Text.RegularExpressions</d2p1:string>
   </Namespaces>
   <Params>
-    <Parameter z:Id="i189">
+    <Parameter z:Id="i207">
       <DefaultValueExpression></DefaultValueExpression>
       <Description></Description>
       <Name>dict_config</Name>
